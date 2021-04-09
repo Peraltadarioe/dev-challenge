@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort,make_response,send_file,render_template
+from flask import Flask, request, jsonify, abort,make_response,send_file,render_template
 from flask_cors import CORS
 import json
 from time import time
@@ -48,7 +48,6 @@ def get_character(id):
         max_rating = 0
         basic_info["homeworld"] = home_world_info
         basic_info["species_name"] = species_name
-        print (basic_info)
         data_response = {
             "name": basic_info["name"],
             "height": basic_info["height"],
@@ -70,14 +69,15 @@ def get_character(id):
 
 @app.route("/character/rating/", methods=['POST'])
 def set_character_rating ():
+    data = request.json
+    print(data)
     con = sqlite3.connect('characters.db')
     cur = con.cursor()
-    data_character = (int(id), basic_info["name"], basic_info["height"], basic_info["mass"], basic_info["hair_color"], basic_info["skin_color"], basic_info["eye_color"],
-                            basic_info["birth_year"], basic_info["gender"], home_world_info["name"], home_world_info["population"], home_world_info["known_residents_counts"],
-                            species_name, 0, 0)
-    cur.execute('INSERT INTO characters VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data_character)
+    cur.execute('INSERT INTO ratings VALUES (?,?)', (data["id"], data["rating"]))
     con.commit()
     con.close()
+    return make_response(jsonify({"state": "ok"}), 200)
+    
     pass
 
 @app.errorhandler(404)
