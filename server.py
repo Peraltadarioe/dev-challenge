@@ -44,8 +44,19 @@ def get_character(id):
         else:
             species_name = ""
         # consultar avg y max ratings de ese character. Si no trae nada ver que devolver
-        average_rating = 0
-        max_rating = 0
+        average_rating = None
+        max_rating = None
+        ratings = []
+        con = sqlite3.connect('characters.db')
+        cur = con.cursor()
+        query_id = (int(id),)
+        for row in cur.execute('SELECT * FROM ratings WHERE id=?', query_id):
+            ratings.append(row[1])
+        con.close()
+        if len(ratings) > 0:
+            average_rating = sum(ratings) / len(ratings)
+            max_rating = max(ratings)
+        
         basic_info["homeworld"] = home_world_info
         basic_info["species_name"] = species_name
         data_response = {
