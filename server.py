@@ -11,7 +11,6 @@
 
 # ------- START IMPORTS BLOCK -------------------------------------------------------------------
 from flask import Flask, request, jsonify,make_response
-from flask_cors import CORS
 import json
 from time import time
 import requests
@@ -31,7 +30,6 @@ def create_ratings_table():
 
 # ------ START INIT BLOCK ---------------------------------------------------------------------
 app = Flask(__name__)
-cors = CORS(app, resources={r"/gpon/*": {"origins": "*"}})
 con = sqlite3.connect('characters.db')
 # ------ END INIT BLOCK -----------------------------------------------------------------------
 
