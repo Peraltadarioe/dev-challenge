@@ -69,3 +69,8 @@ Respuestas
     {"state": "Error al intentar guardar el rating"}  
    ```
 
+  Código 400  
+   Ejemplo
+   ```  
+    {"state": "Error en la petición"}  
+   ```
