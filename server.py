@@ -20,6 +20,7 @@ import sqlite3
 # ------ FUNCTIONS ------------------------------------------------------------------------
 def create_ratings_table():
     try:
+        con = sqlite3.connect('characters.db')
         cur = con.cursor()
         cur.execute('''CREATE TABLE iF NOT EXISTS ratings
                 (id integer, rating integer)''')
@@ -30,7 +31,7 @@ def create_ratings_table():
 
 # ------ START INIT BLOCK ---------------------------------------------------------------------
 app = Flask(__name__)
-con = sqlite3.connect('characters.db')
+
 # ------ END INIT BLOCK -----------------------------------------------------------------------
 
 # -------------------------------------- START API ENDPOINTS ---------------------------------
