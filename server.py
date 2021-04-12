@@ -86,17 +86,21 @@ def get_character(id):
 # Se guarda en la base de datos
 @app.route("/character/rating/", methods=['POST'])
 def set_character_rating ():
-    data = request.json
-    try:
-        con = sqlite3.connect('characters.db')
-        cur = con.cursor()
-        cur.execute('INSERT INTO ratings VALUES (?,?)', (data["id"], data["rating"]))
-        con.commit()
-        con.close()
-        return make_response(jsonify({"state": "ok"}), 200)
-    except Exception as e:
-        print (e)
-        return make_response(jsonify({"state": "Error al intentar guardar el rating"}), 500)
+    try:    
+        data = request.json
+        _id= data ["id"]
+        rating = data["rating"]
+        try:
+            con = sqlite3.connect('characters.db')
+            cur = con.cursor()
+            cur.execute('INSERT INTO ratings VALUES (?,?)', (_id, rating))
+            con.commit()
+            con.close()
+            return make_response(jsonify({"state": "ok"}), 200)
+        except:
+            return make_response(jsonify({"state": "Error al intentar guardar el rating"}), 500)
+    except:
+        return make_response(jsonify({"state": "Error en la petición"}), 400)
     # -------------------------------------- END API ENDPOINTS ---------------------------------
 
 # -------------------------------------- START ERROR HANDLES ROUTES BLOCK ---------------------------------
