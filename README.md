@@ -1,62 +1,71 @@
 # Star Wars API-Rest Python
 
 ## Instalación
-   Instalar Python -> https://www.python.org/downloads/
-   Instalar librerías
-      Desde la consola:
-          pip install Flask
+   1. Instalar Python -> https://www.python.org/downloads/  
+   2. Instalar librerías  
+      - Desde la consola:  
+          - pip install Flask  
 
 ## Rutas de API
 
 ### [GET] /character/
 
-Parámetros
-id -> Id del personaje. Este valor se utiliza para consultar a https://swapi.dev/api/people
+Parámetros  
+id -> Id del personaje. Este valor se utiliza para consultar a https://swapi.dev/api/people  
 
-Respuestas
+Respuestas  
 
- Código 200
- Ejemplo:
-  {
-    "average_rating": null,
-    "birth_year": "19BBY",
-    "eye_color": "blue",
-    "gender": "male",
-    "hair_color": "blond",
-    "height": "172",
-    "homeworld": {
-        "known_residents_counts": 10,
-        "name": "Tatooine",
-        "population": "200000"
-    },
-    "mass": "77",
-    "max_rating": null,
-    "name": "Luke Skywalker",
-    "skin_color": "fair",
-    "species_name": ""
-  }
+ Código 200  
+ Ejemplo:  
+ ```
+  {  
+    "average_rating": null,  
+    "birth_year": "19BBY",  
+    "eye_color": "blue",  
+    "gender": "male",  
+    "hair_color": "blond",  
+    "height": "172",  
+    "homeworld": {  
+        "known_residents_counts": 10,  
+        "name": "Tatooine",  
+        "population": "200000"  
+    },  
+    "mass": "77",  
+    "max_rating": null,  
+    "name": "Luke Skywalker",  
+    "skin_color": "fair",  
+    "species_name": ""  
+  }  
+```
+
+  Código 500  
+  Ejemplo  
+  ```
+     {'state': 'Error interno'}  
+  ```
+
+### [POST] /character/rating/  
+
+ Ejemplo POST body (json)  
+ ```
+   {  
+     "id":1,  
+     "rating": 5  
+   }  
+ ```
 
 
-  Código 500
-  Ejemplo
-     {'state': 'Error interno'}
+ Respuestas  
 
-### [POST] /character/rating/
+  Código 200  
+  Ejemplo:  
+     ```
+     {"state": "ok"}  
+     ```
 
- Ejemplo POST body (json)
-   {
-     "id":1,
-     "rating": 5
-   }
-
-
- Respuestas
-
-  Código 200
-  Ejemplo:
-     {"state": "ok"}
-
-  Código 500
+  Código 500  
    Ejemplo
-     {"state": "Error al intentar guardar el rating"}
+   ```  
+    {"state": "Error al intentar guardar el rating"}  
+   ```
 
